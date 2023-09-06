@@ -8,6 +8,7 @@ export const SearchBar = () => {
         <ZoomIcon width={20} height={20} />
         <span>질환명을 입력해주세요.</span>
       </StyledPlaceholder>
+      <StyledButton></StyledButton>
     </StyledSearchBar>
   );
 };
@@ -27,4 +28,11 @@ const StyledPlaceholder = styled.div`
   color: #a7afb7;
   font-size: 1.125rem;
   cursor: text;
+`;
+
+const StyledButton = styled.button`
+  border-radius: 100%;
+  width: 48px;
+  height: 48px;
+  background-color: #007be9;
 `;
