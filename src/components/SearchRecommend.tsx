@@ -15,4 +15,5 @@ const StyledContainer = styled.div`
 const StyledTitle = styled.p`
   color: gray;
   margin: 0;
+  font-size: small;
 `;
