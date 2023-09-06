@@ -26,4 +26,5 @@ const StyledPlaceholder = styled.div`
   align-items: center;
   color: #a7afb7;
   font-size: 1.125rem;
+  cursor: text;
 `;
