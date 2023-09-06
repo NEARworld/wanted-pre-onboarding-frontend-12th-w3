@@ -3,38 +3,45 @@ import styled from 'styled-components';
 
 import { useInput } from 'hooks/useInput';
 
+import { SearchResult } from './SearchResult';
+
+const BUTTON_COLOR = '#007be9';
+
 export const SearchBar = () => {
   const { inputBoxRef, isInputVisible, setIsInputVisible } = useInput();
 
   return (
-    <StyledSearchBar>
-      <StyledInputBox
-        ref={inputBoxRef}
-        onClick={e => {
-          e.stopPropagation();
-          setIsInputVisible(true);
-        }}
-      >
-        <StyledPlaceholder $isInputVisible={isInputVisible}>
-          <ZoomIcon width={20} height={20} />
-          <span>질환명을 입력해주세요.</span>
-        </StyledPlaceholder>
-        <StyledInput type='text' width='100%' />
-      </StyledInputBox>
-      <StyledButton>
-        <ZoomIcon width={20} height={20} fill='white' />
-      </StyledButton>
-    </StyledSearchBar>
+    <>
+      <StyledSearchBar $isInputVisible={isInputVisible}>
+        <StyledInputBox
+          ref={inputBoxRef}
+          onClick={e => {
+            e.stopPropagation();
+            setIsInputVisible(true);
+          }}
+        >
+          <StyledPlaceholder $isInputVisible={isInputVisible}>
+            <ZoomIcon width={20} height={20} />
+            <span>질환명을 입력해주세요.</span>
+          </StyledPlaceholder>
+          <StyledInput type='text' width='100%' />
+        </StyledInputBox>
+        <StyledButton>
+          <ZoomIcon width={20} height={20} fill='white' />
+        </StyledButton>
+      </StyledSearchBar>
+      <SearchResult isInputVisible={isInputVisible} />
+    </>
   );
 };
 
-const StyledSearchBar = styled.div`
+const StyledSearchBar = styled.div<{ $isInputVisible: boolean }>`
   max-width: 490px;
   width: 100%;
   display: flex;
   align-items: center;
   border-radius: 42px;
-  border: 2px solid white;
+  border: ${props => (props.$isInputVisible ? `2px solid ${BUTTON_COLOR}` : '2px solid white')};
   background-color: white;
 `;
 
@@ -65,7 +72,7 @@ const StyledButton = styled.button`
   height: 48px;
   border: none;
   cursor: pointer;
-  background-color: #007be9;
+  background-color: ${BUTTON_COLOR};
   display: grid;
   place-items: center;
   margin-right: 10px;
