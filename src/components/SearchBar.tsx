@@ -58,6 +58,7 @@ const StyledPlaceholder = styled.div<{ isInputVisible: boolean }>`
 
 const StyledInput = styled.input`
   border: none;
+  outline: none;
   padding-right: 20px;
 `;
 
