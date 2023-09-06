@@ -1,15 +1,28 @@
+import { useEffect, useRef, useState } from 'react';
+
 import { ReactComponent as ZoomIcon } from 'assets/zoom.svg';
 import styled from 'styled-components';
 
 export const SearchBar = () => {
+  const [isInputVisible, setIsInputVisible] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const input = inputRef.current;
+    if (input && isInputVisible) input.focus();
+  }, [isInputVisible]);
+
   return (
     <StyledSearchBar>
       <StyledInputBox>
-        <StyledPlaceholder>
+        <StyledPlaceholder
+          isInputVisible={isInputVisible}
+          onClick={() => setIsInputVisible(!isInputVisible)}
+        >
           <ZoomIcon width={20} height={20} />
           <span>질환명을 입력해주세요.</span>
         </StyledPlaceholder>
-        <StyledInput type='text' width='100%' />
+        <StyledInput ref={inputRef} type='text' width='100%' />
       </StyledInputBox>
       <StyledButton>
         <ZoomIcon width={20} height={20} fill='white' />
@@ -33,9 +46,9 @@ const StyledInputBox = styled.div`
   padding: 20px 10px 20px 24px;
 `;
 
-const StyledPlaceholder = styled.div`
+const StyledPlaceholder = styled.div<{ isInputVisible: boolean }>`
   position: absolute;
-  display: flex;
+  display: ${props => (props.isInputVisible ? 'none' : 'flex')};
   gap: 12px;
   align-items: center;
   color: #a7afb7;
