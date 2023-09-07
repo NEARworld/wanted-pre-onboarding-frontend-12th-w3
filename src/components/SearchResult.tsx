@@ -1,6 +1,8 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 
 import styled from 'styled-components';
+
+import { useRecent } from 'hooks/useRecent';
 
 import { SearchRecommend } from './SearchRecommend';
 
@@ -9,23 +11,14 @@ type Props = {
 };
 
 export const SearchResult: FC<Props> = ({ isInputVisible }) => {
-  const [recentItems, setRecentItems] = useState([]);
-  const hasRecentItems = () => {
-    if (recentItems.length === 0)
-      return <StyledRecentGuide>최근 검색어가 없습니다</StyledRecentGuide>;
-    else return null;
-  };
-
-  useEffect(() => {
-    setRecentItems([]);
-  }, []);
+  const { hasRecentItems } = useRecent();
 
   if (isInputVisible)
     return (
       <StyledContainer>
         <StyledRecent>
           <StyledRecentTitle>최근 검색어</StyledRecentTitle>
-          {hasRecentItems()}
+          <StyledRecentGuide>{hasRecentItems()}</StyledRecentGuide>
         </StyledRecent>
         <StyledHr />
         <SearchRecommend />
